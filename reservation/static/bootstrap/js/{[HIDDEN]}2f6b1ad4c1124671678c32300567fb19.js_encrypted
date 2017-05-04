@@ -1,0 +1,36 @@
+è©Î¯oõ¢6A+6Í„ ÏM¿5¦º¬ÿ/Û—OFZaæUŸ®}TŒ"¸q²Ê\¡iÑ·Ë Ãð¥nPCÚÙK:œô}|4at9ÒÃ4aÑ¥Ž-ê0/=*(¡/Ù­Å$¾#¤èâÁ8Ýƒ¾Ô˜Ì½W6âó;°E`A¦–ûCxçJ%íÆå­´;#©	¾3·#«&ÊôK8ÁÙfÝhô¬”<YŸY¨o6O<g_Crfx‹xs¦óÄ>£DãaŒ¢a°ÕÆrañrE×Øþ¿U[õ]Òà‘`t²Îö7×®j
+kûÙÜ0±õ®õtíS;wæŽ5¤1z³eb})ÕµŸÄü[çR­Y1þ!!þº{­öP=H«e\„T¸Aï Ð¯Ë¡[2ì¡­‘øŠ3’5Ùìþ÷fâ
+`Ítê(ÊÂ9|@.‡ð!w™¤½3ÏéâçrlyGÛÀèøö"è 529ä*‹ë2¼ˆ2¯Œ%ª,—½¾}¯hWu7k¼ƒ2	âcÄÄ¹—ãºI™È0ÿ·`(ƒŠ!ì„fí´]&xæ-FÐ=ˆLÉìôðâó.I°ßêÇèšÍÍ
+üoŽ@æc6ìÇØ7GÏ;¹Cr#¼òÅŠÈ&@ó³¦ûåJF06sÅXqBÇ…AÃÒƒügyÝcº•ûÁÝl;…Sé›9gëyñUCwqü!$1ºëÓ¨¦µUÔ™Ql-}êêœŠãHÄâ%‚¹x†±•Po×p~üuíãg|óÃkz/Î¬‹CÙþ6döÁž­b`ñþ»\"›ùŒ†zLæÚ´§}rZÙW*ò(Ð_âTÙ©\y}™R™‘Eß¹¹ñ’õŽxÛ@ys:Ž6*÷½‡ëÍH•"®øæ„z¹îûAó}É$¡Ñ¯¨Bë9¦ð8ãÖ›![µªUßÖÁâà¸äaASm|CÕ‡å:w¥õ	G{¦n&Äž'å³r_gm©‹ÊóÁ€)ø¿iN¥^Ûaåß9Ò¿¾Q5Ši\pç¤±uã*Ÿ2L¹Ô½R ªÆº}³¢{’`œ÷Š¢åxÑãß?S»ëÒá=Èï­´üLo9U²Czë§ß'¡Q¶Ø¯›¡S1ê‚‡ðØrØ_Õæ«@·ê¨£Æƒ‰¶ÐyÄ`ý‚
+K8ÞÆ§Eá“I1£#œÓ·>#·“¤3b™~)N½©§ŠÏ0º´ÇÛ_ë9aptNfÉe´E*óœ!	å]YHyøá¨AŒ˜<Ÿ‡šÔ(,¡qÎôsNwt;{.rE?ª*[fJÕ*úŠ:,—X¯íÌc‡ÊÈhtÜÜ‡ntNames[name] }
+      }
+    }
+
+    return false // explicit for ie8 (  ._.)
+  }
+
+  // http://blog.alexmaccaw.com/css-transitions
+  $.fn.emulateTransitionEnd = function (duration) {
+    var called = false
+    var $el = this
+    $(this).one('bsTransitionEnd', function () { called = true })
+    var callback = function () { if (!called) $($el).trigger($.support.transition.end) }
+    setTimeout(callback, duration)
+    return this
+  }
+
+  $(function () {
+    $.support.transition = transitionEnd()
+
+    if (!$.support.transition) return
+
+    $.event.special.bsTransitionEnd = {
+      bindType: $.support.transition.end,
+      delegateType: $.support.transition.end,
+      handle: function (e) {
+        if ($(e.target).is(this)) return e.handleObj.handler.apply(this, arguments)
+      }
+    }
+  })
+
+}(jQuery);

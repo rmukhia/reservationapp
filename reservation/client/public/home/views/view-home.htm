@@ -1,0 +1,12 @@
+<!-- When No User has logged in, show this jumbotron -->
+<div class="jumbotron" ng-if="AuthService.user === null">
+    <div class="container">
+        <h1>{{AppConfig.welcome}}</h1>
+        <p>{{AppConfig.welcome_description}}</p>
+        <p>
+            <a class="btn btn-primary btn-lg" ng-click="AuthService.login()">{{AppConfig.welcome_button_text}}</a>
+        </p>
+    </div>
+</div>
+<div ng-include="AppConfig.base_path + '/home/views/view-list.htm'" ng-if="AuthService.user"></div>
+</div>

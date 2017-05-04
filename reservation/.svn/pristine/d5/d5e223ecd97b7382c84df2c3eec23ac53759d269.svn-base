@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="shortcut icon" href='{% static 'assets/images/ixia_ico.ico' %}' />
+    
+    <title> {{AppConfig.title}} </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <!-- Include CSS -->
+    <link rel="stylesheet" href='{% static 'bootstrap/dist/css/bootstrap.css' %}'/>
+    <link rel="stylesheet" href='{% static 'bootstrap/dist/css/bootstrap-theme.css' %}'/>
+
+    <!-- Custom CSS -->
+    {% for css_file in AppConfig.css_files %}<link rel="stylesheet" href='{% static css_file %}'/>
+    {% endfor %}
+
+</head>
+<style>
+    @font-face {
+        font-family: Gotham-Light   ;
+        src: url("{% static 'assets/fonts/Gotham-Light.otf' %}") format("opentype");
+    }
+    
+    @font-face {
+        font-family: Gotham-Light;
+        src: url("{% static 'assets/fonts/Gotham-Light.otf' %}") format("opentype");
+    }
+
+    body{
+        font-family: Gotham-Light !important;
+        /*background-image: url("http://ixin-bitwise:9000/static/assets/images/back-img.jpg");*/
+       }   
+</style>
+<body class="full">
+    <div ng-include="'{% static "base/views/view-navbar.htm" %}'" ></div>
+    <div class="container">
+        <div ui-view class="custom-content"></div>
+    </div>
+
+     <div class="footer">
+         <p class="text-muted pull-middle">&copy; Ixia Reservation App </p>
+     </div>
+
+    <!-- Include Scripts -->
+    <script type="text/javascript" src='{% static 'jquery/dist/jquery.js' %}'></script>
+    <script type="text/javascript" src='{% static 'underscore/underscore.js' %}'></script>
+    <script type="text/javascript" src='{% static 'angular/angular.js' %}'></script>
+    <script type="text/javascript" src='{% static 'angular-ui-router/release/angular-ui-router.js' %}'></script>
+    <script type="text/javascript" src='{% static 'angular-bootstrap/ui-bootstrap-tpls.js' %}'></script>
+    <script type="text/javascript" src='{% static 'angular-animate/angular-animate.js' %}'></script>
+    <script type="text/javascript" src='{% static 'ng-file-upload/ng-file-upload-all.js' %}'></script>
+
+    <!-- The link between django and angularjs urls -->
+    <script type="text/javascript" src={%url 'base:client_appconfig' %}></script>
+
+    <!-- Custom js -->
+    {% for angular_file in AppConfig.angular_files %}<script type="text/javascript" src='{% static angular_file %}'></script>
+    {% endfor %}
+    <!-- <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; CopyRight Ixia Reservation App.</p>
+      </div>
+    </footer> -->
+</body>
+
+</html>

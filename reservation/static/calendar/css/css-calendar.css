@@ -1,0 +1,168 @@
+
+.calendar_time_text {
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #620C67;
+    font-weight: bold;
+    text-align: right;
+}
+
+
+.calendar_time_text_hour {
+    font-size: 0.8em;
+
+}
+
+.calendar_time_text_half_hour {
+    font-size: 0.6em;
+}
+
+.calendar_time_marker {
+    min-width:5px;
+}
+
+.calendar_right_border {
+    border-right: 2px solid  #D3D1D2;
+}
+
+.calendar_bottom_border {
+    border-bottom: 3px solid  #D3D1D2;
+    min-width: 10px;
+}
+
+.calendar_time_slot {
+    min-width: 100px;
+    background: repeating-linear-gradient(
+    0deg,
+    #FCFAFB,
+    #FCFAFB,
+    #F0F0F0,
+    #F0F0F0);
+    );
+    cursor:pointer;
+}
+
+
+.calendar_time_slot_bottom_border {
+    border-bottom: 1px solid #D3D1D2;
+}
+
+.calendar_time_slot_top_border {
+    border-top: 1px solid #D3D1D2;
+}
+
+.calendar_time_slot_side_border {
+    border-left: 1px solid #D3D1D2;
+    border-right: 1px solid #D3D1D2;
+}
+
+.calendar_time_slot:hover {
+    background: #D3D1D2;
+}
+
+.calendar_time_slot_selected {
+    background: #D3D1D2;
+}
+
+.calendar_time_slot_other_reserved {
+    background: repeating-linear-gradient(
+    90deg,
+    #5EA032,
+    #5EA032,
+    #D59859,
+    #D59859);
+
+    cursor: default;
+}
+
+.calendar_time_slot_user_reserved {
+    background: repeating-linear-gradient(
+    90deg,
+    #620C67,
+    #620C67,
+    #425C81,
+    #425C81);
+    );
+    cursor: default;
+}
+
+.calendar_left_spacer{
+    min-width:50px;
+}
+
+.calendar_header {
+    padding-bottom: 20px;
+}
+
+.calendar_not_selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+.overflow {
+ overflow-y: scroll;
+}
+
+
+.alignment
+{
+    margin-left:150px;
+}
+
+.text
+{
+    margin-left: 2px;
+    padding-left: 2px;
+    font-size: 20px;
+}
+
+.select_box
+{
+    margin-top :40px;
+    margin-left:20px;
+}
+
+.user_reserved_slot
+{
+    width:15px;
+    height:15px;
+    border:1px solid #000;
+    background:repeating-linear-gradient(
+        90deg,
+        #620C67,
+        #620C67,
+        #425C81,
+        #425C81
+        );
+}
+
+.other_reserved_slot
+{
+    width:15px;
+    height:15px;
+    border:1px solid #000;
+    background:repeating-linear-gradient(
+        90deg,
+        #5EA032,
+        #5EA032,
+        #D59859,
+        #D59859
+        );
+}
+
+.calendar_name_label
+{
+  color : white;
+  padding-left: 10px;
+
+}
+
+/*.a
+{
+    margin-left:20px;
+}*/

@@ -1,0 +1,138 @@
+<div class="page-header">
+  <h1>Records <small>Reserve Chassis</small></h1>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <form action="" role="form" ng-submit="submit.add();">
+            <legend>Records</legend>
+            <fieldset class="form-group">
+                <label class="col-sm-2 control-label">Chassis:</label>
+                <div class="col-sm-6">
+                    <select ng-model="submit.selected_chassis" class="form-control" ng-options="chassis as chassis.name for chassis in submit.chassis_list" required="true"></select>
+                </div>
+            </fieldset>
+            
+            <fieldset class="form-group">
+                <label class="col-sm-2 control-label">Blade:</label>
+                <div class="col-sm-6">
+                    <select ng-model="submit.selected_blade" class="form-control" ng-options="blade as blade.name for blade in submit.blade_list | filter : submit.selected_chassis.url" required="true"></select>
+                </div>
+            </fieldset>
+
+            <fieldset class="form-group">
+                <label class="col-sm-2 control-label">Start Time:</label>
+                <div class="col-sm-10">
+                    <uib-timepicker ng-model="submit.start_time.time" ng-change="changed()" hour-step="1" minute-step="1" show-meridian="true" required="true"></uib-timepicker>
+                </div>
+                <span class="col-sm-2"></span>
+                <div class="col-sm-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{submit.start_time.date_format}}" 
+                            ng-model="submit.start_time.date" is-open="submit.start_time.date_popup" 
+                            min-date="submit.start_time.min_date" max-date="submit.start_time.max_date" 
+                            required="true"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="submit.start_time.date_popup = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p> 
+                </div>
+            </fieldset>
+           
+            <fieldset class="form-group">
+                <label class="col-sm-2 control-label">End Time:</label>
+                <div class="col-sm-10">
+                    <uib-timepicker ng-model="submit.end_time.time" ng-change="changed()" hour-step="1" minute-step="1" show-meridian="true" required="true"></uib-timepicker>
+                </div>
+                <span class="col-sm-2"></span>
+                <div class="col-sm-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{submit.end_time.date_format}}" 
+                            ng-model="submit.end_time.date" is-open="submit.end_time.date_popup" 
+                            min-date="submit.end_time.min_date" max-date="submit.end_time.max_date" 
+                            required="true"/>
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="submit.end_time.date_popup = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p> 
+                </div>
+            </fieldset>
+            <fieldset class-"form-group">
+                <span class="col-sm-2"></span>
+                <div class="col-sm-6">
+                    <uib-alert  type="danger" dismiss-on-timeout="5" ng-if="submit.invalid_input == true;">Enter valid data!</uib-alert>
+                </div>
+                 <div class="col-sm-4" style="text-align:right;">
+                    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>&nbsp; Add</button>
+                </div>
+            </fieldset>
+
+        </form>
+    </div>
+</div>
+
+<!-- This for search any string over the table -->
+<fieldset class="form-group">
+    <label class="col-xs-2 col-sm-2 col-md-2 col-lg-2 control-label">Search:</label>
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+        <input type="text" class="form-control" ng-model = "submit.search_string" ng-change = "submit.get_records(1)"></input>
+    </div>
+    <div class='col-xs-4 col-sm-4 col-md-4 col-lg-4'>
+      <input type="button" value = "Submit" class = "btn btn-primary" ng-click = "submit.get_records(1)" />
+    </div>
+</fieldset>
+
+<div class = "table-responsive record_table_height">
+    <table class="table table-condensed table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>Options</th>
+            <th>Chassis </th>
+            <th>Hostname</th>
+            <th>Blade</th>
+            <th>User</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in records_table.records">
+            <td>
+            <div class="btn-group" uib-dropdown>
+                <button id="single-button" type="button" uib-dropdown-toggle ng-class="disable(row)">
+                    <span class="glyphicon glyphicon-menu-hamburger"aria-hidden="true" ></span>
+                </button>
+                <ul uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                     <li role="menuitem"><a href ng-click="modal.remove.open(row)" >Delete</a></li>
+                </ul>
+            </div>
+            </td>
+            <td>{{row.chassis}}</td>
+            <td>{{row.hostname}}</td>
+            <td>{{row.blade}}</td>
+            <td>{{row.user}}</td>
+            <td>{{row.start_time | get_locale_time}}</td>
+            <td>{{row.end_time | get_locale_time}}</td>
+            
+        </tr> 
+    </tbody>
+</table>
+<div class="record_table_pagnation_container">
+    <uib-pagination total-items="records_table.total_records" ng-model="records_table.page" items-per-page="records_table.records_per_page" ng-change="records_table.get_records(records_table.page);"></uib-pagination>
+</div>
+</div>
+
+<script type="text/ng-template" id="myModalContent.html">
+        <div class="modal-header">
+            <h3 class="modal-title">{{title}}</h3>
+        </div>
+        <div class="modal-body">
+           {{message}}
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-primary" type="button" ng-click="ok()">OK</button>
+            <button class="btn btn-warning" type="button" ng-click="cancel();" 
+                ng-if="show_cancel == true">Cancel</button>
+        </div>
+</script>

@@ -1,0 +1,48 @@
+<nav class="navbar  navbar-default" role="navigation" ng-controller="NavbarController">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#" style="color:#FFF;">{{AppConfig.title}}</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" uib-collapse="navCollapsed" ng-switch on="AuthService.user">
+        <ul class="nav navbar-nav" ng-switch-default>
+            <li ng-class="navbar_link('home');">
+                <a ui-sref="home">Home</a>
+            </li>
+             <li ng-class="navbar_link('calendar');">
+                <a ui-sref="calendar">Calendar</a>
+            </li>
+           <li ng-class="navbar_link('records');">
+                <a ui-sref="records">Records</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" ng-switch-default>
+            <li ng-class="navbar_link('develop');">
+                <a ui-sref="develop">Development</a>
+            </li>
+             
+            <li class="dropdown"  uib-dropdown>
+                <a href="#" class="dropdown-toggle" uib-dropdown-toggle>
+                    <span class="glyphicon glyphicon-user" aria-hidden="true" ng-if="AuthService.user.preferences[0].image == null"></span>
+                    <img src="{{AuthService.user.preferences[0].image}}" height="20" width="40" ng-if="AuthService.user.preferences[0].image != null"></img>&nbsp;{{AuthService.user.first_name}}<b class="caret" ></b>
+                </a>
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                    <li><a ui-sref="preference">Settings</a></li>
+                    <li><a href ng-click="AuthService.logout()">Sign Out</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right" ng-switch-when=null>
+            <li>
+                <a href ng-click="AuthService.login()">Sign In</a>
+            </li>
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</nav>

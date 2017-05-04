@@ -1,0 +1,12 @@
+{
+  "undef": true,
+  "unused": true,
+  "node": true,
+  "predef": [ 
+            "angular",
+            "AppConfig",
+            "document",
+            "window",
+            "urlRouterProvider"
+        ]
+}

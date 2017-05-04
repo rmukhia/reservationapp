@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style type="text/css">
+
+body {
+	font-family: sans-serif;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    text-align: left;
+    padding: 5px;
+    padding-right: 10px;
+}
+
+table.table1
+{
+	background-color:#ffff80;
+}
+table.table2 {
+    border-collapse: collapse;
+    background-color: #FFE7E7;
+
+}
+
+table.table2, th.table2, td.table2 {
+	border: 1px solid gray;
+    text-align: left;
+    padding: 5px;
+}
+
+
+div {
+  padding-left: 50px;
+  padding-bottom: 50px;
+}
+
+.large_text {
+	font-size: 1.2em;
+	color: brown;
+}
+
+
+
+</style>
+</head>
+<body>
+
+	<div>
+	<h3><a href='{{AppConfig.hostname}}'>{{AppConfig.title}} App</a></h3>
+	<h1>Notification</h1>
+	</div>
+
+	<div>
+		<p><h5> <span class="large_text"><i>{{user.first_name}} {{user.last_name}}</i></span> has added a new record.</h5></p>
+	<table class="table1">
+		<thead>
+		</thead>
+		<tbody>
+		<tr>
+			<th>Chassis: </th>
+			<td>{{current_record.blade.chassis.name}}</td>
+		</tr>
+		<tr>
+			<th>Hostname: </th>
+			<td>{{current_record.blade.chassis.hostname}}</td>
+		</tr>
+		<tr>
+			<th>Blade: </th>
+			<td>{{current_record.blade.name}}</td>
+		</tr>
+		<tr>
+			<th>Start Time: </th>
+			<td>{{current_record.start_time}}</td>
+		</tr>
+		<tr>
+			<th>End Time: </th>
+			<td>{{current_record.end_time}}</td>
+		</tr>
+
+		</tbody>
+	</table>
+	</div>
+
+	<div>
+		<p><h5> The last 5 records relevant to <span class="large_text"><i>{{recepient.first_name}} {{recepient.last_name}}</i></span></h5></p>
+	<table class="table2"> 
+		<thead>
+			<tr>
+				<th>Chassis: </th>
+				<th>Hostname: </th>
+				<th>Blade: </th>
+				<th>Username: </th>
+				<th>Start Time: </th>
+				<th>End Time: </th>
+			</tr>
+		</thead>
+		{% for record in record_list %}
+		<tr>			
+			<td>{{record.blade.chassis.name}}</td>
+			<td>{{record.blade.chassis.hostname}}</td>
+			<td>{{record.blade.name}}</td>
+			<td>{{record.user.username}}</td>
+			<td>{{record.start_time}}</td>
+			<td>{{record.end_time}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	</div>
+</body>
+</html>
